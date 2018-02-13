@@ -108,7 +108,7 @@
 							<img :src=" 'assets/btnr-' + btnBStatus + '.gif' ">
 						</div>
 
-						<a class="btn btn-down" v-if="!messageShow" v-on="{ mousedown: scrollStart, mouseup: scrollStop, touchstart: scrollStart, touchend: scrollStop, touchmove: doNothing }" :class="downPressed?'pressed':''">
+						<a class="btn btn-down" v-if="!messageShow & !gameEnding" v-on="{ mousedown: scrollStart, mouseup: scrollStop, touchstart: scrollStart, touchend: scrollStop, touchmove: doNothing }" :class="downPressed?'pressed':''">
 							<span class="text">Down</span>
 						</a>
 
@@ -159,7 +159,7 @@
 						<button v-on:click="startGame" class="btn-start">开始游戏</button>
 					</div>
 
-					<p class="tips">* 因为 JJ 懒得写音乐控制模块，现在是你把音量调低的最后机会啦~</p>
+					<p class="tips">* 因为 JJ 懒得写音乐控制模块，所以现在是你把音量调低的最后机会啦~</p>
 
 				</div>
 			</div>
@@ -178,5 +178,24 @@
 	<script src="assets/main.js"></script>
 	<audio src="assets/my-edit.mp3" id="game-bgm" class="media-audio" preload loop="loop">
 	<audio src="assets/bgm2.mp3" id="game-bgm-2" class="media-audio" preload loop="loop">
+	<!-- ~Baidu Analytics -->
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+		var hm = document.createElement("script");
+		hm.src = "https://hm.baidu.com/hm.js?d6fc362c05908e5ce8d17df52dbc2586";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+	<!-- ~Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94081953-2"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-94081953-2');
+	</script>
 </body>
 </html>

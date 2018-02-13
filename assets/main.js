@@ -2,7 +2,7 @@ var g = new Vue({
   el: '#game',
   data: {
     onOpening: true,
-    moveSpeed: 10,
+    moveSpeed: 1,
     messageShow: false,
     y: 600,
     inScrolling: false,
@@ -37,7 +37,8 @@ var g = new Vue({
     nickName: '',
     showIndication: true,
     jjNewPosition: false,
-    leonNewPosition: false
+    leonNewPosition: false,
+    gameEnding: false,
   },
   watch: {
     y: function () {
@@ -72,7 +73,6 @@ var g = new Vue({
       }
     },
     showDialog: function () {
-      // g.scrollStop()
       if (messageData[g.currentMessageId][1] == 'Leon') {
         g.statusNow = 'talking1'
       }
@@ -120,15 +120,6 @@ var g = new Vue({
       }
       g.btnAStatus = 'normal'
     },
-    // btnB: function () {
-    //   event.preventDefault()
-    //   g.shakeIt = true
-    //   g.btnBStatus = 'normal'
-    //   n = Math.floor(Math.random()*10)
-    //   g.currentNotification = btnBMessage[n]
-    //   g.showNotification = true
-    //   g.magicCount ++
-    // },
     btnB: function () {
       event.preventDefault()
       g.jumpNow = false
@@ -269,9 +260,29 @@ checkProgress = function(y) {
     break
     case Math.round(g.sceneHeight * 3 - g.sceneMoveOffset): // 进第四关
       g.currentLevel++
-        audioAutoPlay('opening-bgm')
+      audioAutoPlay('opening-bgm')
     break
     case Math.round(g.sceneHeight * 3.3 - g.sceneMoveOffset): // 深圳
+      g.showDialog()
+    break
+    case Math.round(g.sceneHeight * 3.8 - g.sceneMoveOffset): // 「套路」
+      g.showDialog()
+    break
+    case Math.round(g.sceneHeight * 4 - g.sceneMoveOffset): // 进第五关
+      g.currentLevel++
+    break
+    case Math.round(g.sceneHeight * 4.3 - g.sceneMoveOffset): // iTunes
+      g.showDialog()
+    break
+    case Math.round(g.sceneHeight * 4.55 - g.sceneMoveOffset): // 网易
+      g.showDialog()
+    break
+    case Math.round(g.sceneHeight * 4.6 - g.sceneMoveOffset): // 结尾
+      g.changeFormation()
+    break
+    case Math.round(g.sceneHeight * 4.7 - g.sceneMoveOffset): // 结尾
+        g.gameEnding = true;
+        g.scrollStop()
         g.showDialog()
     break
     default: break
@@ -328,9 +339,23 @@ var messageData =
   ["哈哈哈，是深圳机场啦~","Leon",1],
   ["今年我们办了两次线下活动，其中一次就在深圳哦~","JJ",1],
   ["两年来我们已经去过四个城市，见过 310 人次的听众啦~","Leon",0],
-  //订阅数
+  // 套路
   ["一般来说年度总结总要有个「列数字环节」吧~","You",1],
-  ["嗯，你已经熟悉我们的套路了","You",1],
+  ["嗯，你已经熟悉我们的套路了，马上就来了","JJ",0],
+  // iTunes
+  ["先要感谢大家积极响应我们的「音频弹窗」，哈哈哈","Leon",1],
+  ["哈哈哈哈，我们在 iTunes 播客上终于有 100 条评论/打分了~","JJ",0],
+  // 网易
+  ["不过现在我们的主推平台还是网易音乐，毕竟用的人多~","JJ",1],
+  ["嗯，2017 年 10 月，我们在网易上的订阅数终于破万啦！","Leon",0],
+  // Ending
+  ["今年好看的数字不多，就列这两个吧~","JJ",1],
+  ["嗯，主要还是想感谢大家一年来的陪伴~","Leon",1],
+  ["（屁咧…… 明明就是假期快到了，懒得做下去了……）","You",1],
+  ["咳…… 咳…… Anyway，光头大哥，应该出分享提醒了……","Leon",1],
+  ["不存在的，我最讨厌诱导分享了","JJ",1],
+  ["真想要分享的，现在啥浏览器不能方便地一键分享啊~","JJ",1],
+  ["噗…… 那好吧，我们狗年再见啦~ ","Leon",0],
 ]
 
 var btnArrowMessage =

@@ -52,6 +52,8 @@ main {
 	height: 70%;
 	/* border: 3px solid #333; */
 	overflow: hidden;
+	background: url('tile.gif') repeat-y;
+	background-size: contain;
 }
 footer {
 	position: fixed;
@@ -350,7 +352,7 @@ footer a {
 	border: none;
 }
 #map-behind{
-	height: 35%;
+	height: 30%;
 }
 /* ~Notification */
 #notification{
