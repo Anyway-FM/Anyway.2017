@@ -15,6 +15,7 @@ body {
 	overflow: hidden;
 	position: fixed;
 	font-family: '8-bit', sans-serif;
+	-moz-user-select: none;
 }
 @font-face {
 	font-family: '8-bit';
@@ -121,9 +122,11 @@ footer a {
 	background-size: cover;
 	font-family: 'Tahoma', sans-serif;
 	font-size: .875rem;
+	pointer-events: none;
 }
 #opening.show{
 	opacity: 1;
+	pointer-events: auto;
 }
 #opening>.inner{
 	max-width: 500px;
@@ -396,14 +399,15 @@ footer a {
 	position: relative;
 	height: 100%;
 }
-.dummy-btn img{
-	max-width: 100%;
-}
 .dummy-btn{
 	position: absolute;
 	width: 30%;
 	left: 7%;
 	bottom: 23%;
+	pointer-events: none;
+}
+.dummy-btn img{
+	max-width: 100%;
 }
 .dummy-r{
 	left: 75%;

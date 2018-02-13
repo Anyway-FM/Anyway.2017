@@ -2,7 +2,7 @@ var g = new Vue({
   el: '#game',
   data: {
     onOpening: true,
-    moveSpeed: 1,
+    moveSpeed: 10,
     messageShow: false,
     y: 600,
     inScrolling: false,
@@ -57,6 +57,7 @@ var g = new Vue({
       g.downPressed = true
       g.statusNow = 'walking'
       g.arrowStatus = 'down'
+      event.preventDefault()
   	},
     scrollDown: function(offset){
       if (!g.messageShow) {
