@@ -224,7 +224,7 @@ initProcess = function() {
 
 checkProgress = function(y) {
   switch (y) {
-    case 10:  //开场
+    case 10:  //隐藏提示箭头
       g.showIndication = false
       audioAutoPlay('game-bgm')
     break
@@ -242,7 +242,7 @@ checkProgress = function(y) {
     case Math.round(g.sceneHeight * 1.15 - g.sceneMoveOffset): // 隐藏 JJ
       g.jjShow = false
     break
-    case Math.round(g.sceneHeight * 1.2 - g.sceneMoveOffset): // 隐藏 JJ
+    case Math.round(g.sceneHeight * 1.2 - g.sceneMoveOffset): // JJ 掉水里了
       g.showDialog()
     break
     case Math.round(g.sceneHeight * 1.65 - g.sceneMoveOffset): // Zhihu
@@ -253,7 +253,7 @@ checkProgress = function(y) {
       g.jjShow = true
       g.currentLevel++
     break
-    case Math.round(g.sceneHeight * 2.1 - g.sceneMoveOffset): // JJ 回来了
+    case Math.round(g.sceneHeight * 2.1 - g.sceneMoveOffset): // 调整队形
       g.changeFormation()
     break
     case Math.round(g.sceneHeight * 2.3 - g.sceneMoveOffset): // 演播室
@@ -281,13 +281,13 @@ checkProgress = function(y) {
     case Math.round(g.sceneHeight * 4.55 - g.sceneMoveOffset): // 网易
       g.showDialog()
     break
-    case Math.round(g.sceneHeight * 4.6 - g.sceneMoveOffset): // 结尾
+    case Math.round(g.sceneHeight * 4.6 - g.sceneMoveOffset): // 切换队形
       g.changeFormation()
     break
     case Math.round(g.sceneHeight * 4.7 - g.sceneMoveOffset): // 结尾
-        g.gameEnding = true;
-        g.scrollStop()
-        g.showDialog()
+      g.gameEnding = true;
+      g.scrollStop()
+      g.showDialog()
     break
     default: break
   }
