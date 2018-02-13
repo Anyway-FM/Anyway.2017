@@ -131,27 +131,35 @@
 
 			<div id="opening" :class="onOpening ? 'show': ''">
 				<div class="inner">
-					<h1>Super Anyway 2017</h1>
-					由 Anyway.FM 出品，无须注册，两步即可开玩
-					<section>
-						<h2>开始前请先填写你的昵称</h2>
-						<input v-model="nickName">
-					</section>
 
-					<section>
-						<h2>然后选择角色</h2>
-						<div class="characters">
-							<button v-for="name in characterList" v-on:click="selectCharacter(name)">
-								<img :src="'assets/' + name +'.gif'" class="pixelated">
-								<h1 v-if="currentCharacter == name">Yes</h1>
-								<h1 v-else>No</h1>
-							</button>
-						</div>
-					</section>
+					<div class="logo">
+						<img src="assets/startup-title.png">
+					</div>
 
-					<button v-on:click="startGame" class="btn-start">开始游戏</button>
-					<p>
-						因为 JJ 懒得写音乐控制模块，所以现在是你把音量调低的最后机会啦~
+					<div class="startup-panel">
+
+						<section>
+							<h2><span>1</span>填写你的昵称</h2>
+							<div class="settings-input">
+								<input v-model="nickName" class="name-input">
+							</div>
+						</section>
+
+						<section class="select-character">
+							<h2><span>2</span>选择角色</h2>
+							<div class="settings-input characters">
+								<button v-for="name in characterList" v-on:click="selectCharacter(name)" class="character">
+									<img :src="'assets/' + name +'.gif'" class="pixelated">
+									<img  v-if="currentCharacter == name" class="checkmark" src="assets/checked.png">
+									<img  v-else class="checkmark" src="assets/unchecked.png">
+								</button>
+							</div>
+						</section>
+
+						<button v-on:click="startGame" class="btn-start">开始游戏</button>
+					</div>
+
+					<p class="tips">* 因为 JJ 懒得写音乐控制模块，现在是你把音量调低的最后机会啦~</p>
 
 				</div>
 			</div>
