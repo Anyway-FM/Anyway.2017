@@ -17,12 +17,15 @@ gulp.task('default', function() {
 	    	}))
 		.pipe(plugins.batchReplace(cdnUrl))
     .pipe(plugins.htmlmin({collapseWhitespace: true}))
-    // .pipe(plugins.rename('2017.html'))
 		.pipe(gulp.dest('builds'));
 
 	gulp.src('assets/*.css')
 		.pipe(plugins.cleanCss({compatibility: 'ie8'}))
     .pipe(plugins.batchReplace(cdnUrl))
+    .pipe(gulp.dest('builds'));
+
+  gulp.src('assets/main.js')
+    .pipe(plugins.uglify())
     .pipe(gulp.dest('builds'));
 
 });
