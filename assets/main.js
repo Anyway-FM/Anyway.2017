@@ -42,7 +42,10 @@ var g = new Vue({
   },
   watch: {
     y: function () {
-      g.totalPercent = Math.floor( g.y / ( g.sceneHeight * g.sceneNumber - g.sceneMoveOffset)  * 100 )
+      g.totalPercent = Math.floor( g.y / ( g.sceneHeight * ( g.sceneNumber - 0.3) - g.sceneMoveOffset)  * 100 )
+      if (g.totalPercent == 99) {
+        g.totalPercent = 100
+      }
     }
   },
   methods: {
@@ -335,7 +338,7 @@ var messageData =
   ["信不信我把你俩一起烧了…… 你按下「⇧ 键」试试……","JJ",0],
   //深圳
   ["怎么穿越到春运现场了…… 这是…… 机场？","You",1],
-  ["给你个提示，这里是全国最能逼死密集恐惧症患者的机场","You",1],
+  ["给你个提示，这里是全国最能逼死密集恐惧症患者的机场","JJ",1],
   ["……","You",1],
   ["哈哈哈，是深圳机场啦~","Leon",1],
   ["今年我们办了两次线下活动，其中一次就在深圳哦~","JJ",1],
@@ -347,7 +350,7 @@ var messageData =
   ["先要感谢大家积极响应我们的「音频弹窗」，哈哈哈","Leon",1],
   ["哈哈哈哈，我们在 iTunes 播客上终于有 100 条评论/打分了~","JJ",0],
   // 网易
-  ["不过现在我们的主推平台还是网易音乐，毕竟用的人多~","JJ",1],
+  ["不过现在我们的主推平台还是网易云音乐，毕竟用的人多~","JJ",1],
   ["嗯，2017 年 10 月，我们在网易上的订阅数终于破万啦！","Leon",0],
   // Ending
   ["今年好看的数字不多，就列这两个吧~","JJ",1],
@@ -356,7 +359,8 @@ var messageData =
   ["咳…… 咳…… Anyway，光头大哥，应该出分享提醒了……","Leon",1],
   ["不存在的，我最讨厌诱导分享了","JJ",1],
   ["真想要分享的，现在啥浏览器不能方便地一键分享啊~","JJ",1],
-  ["噗…… 那好吧，我们狗年再见啦~ ","Leon",0],
+  ["噗…… 那好吧，我们狗年再见啦~ ","Leon",1],
+  ["新年快乐~ 我们一直在老地方等你哦~ https://Anyway.FM ","JJ",0]
 ]
 
 var btnArrowMessage =
