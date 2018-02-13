@@ -112,7 +112,7 @@ var g = new Vue({
       g.arrowStatus = 'none'
   	},
     btnA: function () {
-      event.preventDefault()
+
       g.scrollStop()
       g.btnAStatus = 'pressed'
       if (messageData[g.currentMessageId-1][2] != 0) {
@@ -123,6 +123,7 @@ var g = new Vue({
         g.statusNow = 'standing'
       }
       g.btnAStatus = 'normal'
+      event.preventDefault()
     },
     btnB: function () {
       event.preventDefault()
