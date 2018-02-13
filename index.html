@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>Anyway.2017</title>
+	<meta name="description" content="Anyway.2017" />
+	<meta name="author" content="JJ Ying" />
+
+	<link rel="stylesheet" type="text/css" href="assets/main.css" />
+
+	<script src="assets/vue.js"></script>
+
+	<meta property="og:url" content="https://Anyway.FM/2017">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Anyway.2017">
+	<meta property="og:description" content="设计播客 Anyway.FM 的 2017 年度总结">
+	<meta property="og:image" content="https://Anyway.FM/images/cover-s.jpg">
+
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:description" content="设计播客 Anyway.FM 的 2017 年度总结" />
+	<meta name="twitter:title" content="Anyway.2017" />
+	<meta name="twitter:site" content="@anyway__fm" />
+	<meta name="twitter:image" content="https://Anyway.FM/images/cover-s.jpg" />
+
+</head>
+<body>
+
+	<main id="game" :class=" [ inScrolling ? 'scrolling' : '', shakeIt & arrowStatus !='none' & arrowStatus !='down' ? 'shake-it' : '' ] " >
+
+		<div class="on-screen" id="on-screen" :class=" " >
+
+			<div id="map" class="pixelated map">
+					<div id="map-inner" class="map-inner">
+						<img v-for="n in sceneNumber" v-bind:src="'assets/s'+n+'.gif'" v-bind:id="'scene-'+n">
+					</div>
+			</div>
+
+			<div id="map-behind" class="pixelated map">
+				<div id="map-behind-inner" class="map-inner">
+					<img v-for="n in sceneNumber" v-bind:src="'assets/b'+n+'.gif'">
+				</div>
+			</div>
+
+			<div class="players" :class="[ statusNow , jumpNow? 'jumping':'' ]" id="players">
+				<div class="inner pixelated">
+					<img id="leon" class="player leon" v-bind:src="'assets/leon-' + statusNow+'.gif'" :class="leonNewPosition? 'moved' : ''"/>
+
+					<img id="jj" class="player jj" v-bind:src="'assets/jj-' + statusNow + '.gif'" v-if="jjShow" :class="jjNewPosition? 'moved' : ''"/>
+					<img id="npc" class="player npc" v-bind:src="'assets/' + currentCharacter + '-' + statusNow + '.gif'" />
+				</div>
+			</div>
+
+			<div id="map-mask" class="pixelated map">
+				<div id="map-mask-inner" class="map-inner">
+					<img v-for="n in sceneNumber" v-bind:src="'assets/m'+n+'.gif'">
+				</div>
+			</div>
+
+			<div id="dialog" :class="messageShow ? 'show': ''">
+				<div class="pixelated inner">
+						<div class="message">
+							<em>{{ currentSpeaker }}</em> {{ currentMessage }}
+						</div>
+				</div>
+			</div>
+
+			<div id="notification" :class="arrowStatus == 'up' || arrowStatus == 'left' || arrowStatus == 'right' ? 'show' : '' ">
+				<div class="inner">
+					{{ currentNotification }}
+				</div>
+			</div>
+
+			<div id="status-bar" class="pixelated" :class=" 'level-' + currentLevel">
+				<div class="inner">
+					<div class="level">Level 0{{ currentLevel }}</div>
+					<div class="progress">{{ totalPercent }}%</div>
+				</div>
+			</div>
+
+			<div id="direction-indication" class="pixelated" v-if="showIndication">
+				<div class="inner">
+					<img src="assets/indication.gif">
+				</div>
+			</div>
+
+		</div>
+
+		<footer>
+			<div class="inner">
+
+				<div class="mask mask-middle"><img src="assets/mask-middle.png" alt="" />
+				</div>
+				<div class="mask mask-top"></div>
+				<div id="mask-bottom" class="mask mask-bottom"></div>
+
+				<div id="btns">
+					<div class="inner">
+						<div class="dummy-btn dummy-arrows">
+							<img :src=" 'assets/arrow-' + arrowStatus + '.gif' ">
+						</div>
+
+						<div class="dummy-btn dummy-r dummy-a">
+							<img :src=" 'assets/btnr-' + btnAStatus + '.gif' ">
+						</div>
+
+						<div class="dummy-btn dummy-r dummy-b">
+							<img :src=" 'assets/btnr-' + btnBStatus + '.gif' ">
+						</div>
+
+						<a class="btn btn-down" v-if="!messageShow" v-on="{ mousedown: scrollStart, mouseup: scrollStop, touchstart: scrollStart, touchend: scrollStop, touchmove: doNothing }" :class="downPressed?'pressed':''">
+							<span class="text">Down</span>
+						</a>
+
+						<a class="btn btn-up" v-on="{ mousedown: btnUp, mouseup: btnArrowLifted, touchstart: btnUp, touchend: btnArrowLifted, touchcancel: btnArrowLifted }">Up</a>
+
+						<a class="btn btn-left" v-on="{ mousedown: btnLeft, mouseup: btnArrowLifted, touchstart: btnLeft, touchend: btnArrowLifted, touchcancel: btnArrowLifted }">L</a>
+
+						<a class="btn btn-right" v-on="{ mousedown: btnRight, mouseup: btnArrowLifted, touchstart: btnRight, touchend: btnArrowLifted, touchcancel: btnArrowLifted }">R</a>
+
+						<a class="btn btn-a" v-on="{ touchend: btnA, touchstart: btnAPressed, mousedown: btnAPressed, mouseup: btnA }"  v-show="messageShow?'show':''" >A</a>
+
+						<a class="btn btn-b" v-on="{ touchstart: btnBPressed, touchend: btnB, mousedown: btnBPressed, mouseup: btnB }" >B</a>
+					</div>
+				</div>
+
+			</div>
+
+
+
+
+			<div id="opening" :class="onOpening ? 'show': ''">
+				<div class="inner">
+					<h1>Super Anyway 2017</h1>
+					由 Anyway.FM 出品，无须注册，两步即可开玩
+					<section>
+						<h2>开始前请先填写你的昵称</h2>
+						<input v-model="nickName">
+					</section>
+
+					<section>
+						<h2>然后选择角色</h2>
+						<div class="characters">
+							<button v-for="name in characterList" v-on:click="selectCharacter(name)">
+								<img :src="'assets/' + name +'.gif'" class="pixelated">
+								<h1 v-if="currentCharacter == name">Yes</h1>
+								<h1 v-else>No</h1>
+							</button>
+						</div>
+					</section>
+
+					<button v-on:click="startGame" class="btn-start">开始游戏</button>
+					<p>
+						因为 JJ 懒得写音乐控制模块，所以现在是你把音量调低的最后机会啦~
+
+				</div>
+			</div>
+
+		</footer>
+		<div class="scratch" v-if="magicCount > 42">
+			<img src="assets/scratch.png"/>
+			<div class="inner">
+				跟你说了多少遍了你不听……<br>
+				<s>撸</s>戳得太厉害挂掉了吧……<br>
+				那上<a href="https://Anyway.FM">我台官网</a>逛逛呗~
+		</div>
+
+
+	</main>
+	<script src="assets/main.js"></script>
+	<audio src="assets/my-edit.mp3" id="game-bgm" class="media-audio" preload loop="loop">
+	<audio src="assets/bgm2.mp3" id="game-bgm-2" class="media-audio" preload loop="loop">
+</body>
+</html>

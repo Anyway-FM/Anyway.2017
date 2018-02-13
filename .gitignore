@@ -1,0 +1,7 @@
+*.esproj
+node_modules
+source
+builds
+reference
+config.codekit
+archive
