@@ -55,7 +55,7 @@ var g = new Vue({
   	scrollStart: function () {
       g.inScrolling = true
       if (!g.messageShow) {
-          g.currentInterval = setInterval("g.scrollDown(1)",g.moveSpeed)
+        g.currentInterval = setInterval("g.scrollDown(1)",g.moveSpeed)
       }
       g.downPressed = true
       g.statusNow = 'walking'
