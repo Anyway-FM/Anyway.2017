@@ -3,9 +3,9 @@ var gulp = require('gulp'),
     plugins = gulpLoadPlugins();
 
 var cdnUrl = [
-  [ '../builds/fonts/', 'https://anw.red/font/' ],
-  [ 'assets/vue.js', 'https://anw.red/js/vue.min.js' ],
-	[ 'assets/', 'https://anw.red/anyway.2017/' ]
+  [ '../builds/fonts/', 'https://s.anw.red/font/' ],
+  [ 'assets/vue.js', 'https://s.anw.red/js/vue.min.js' ],
+  [ 'assets/', 'https://s.anw.red/anyway.2017/' ]
 ];
 
 gulp.task('default', function() {
