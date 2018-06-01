@@ -72,7 +72,6 @@ var g = new Vue({
         document.getElementById("map-behind-inner").style.transform = "translateY(" + g.y + "px)"
 
         g.y = - g.y
-        console.log(g.y)
         checkProgress(g.y)
       }
     },
@@ -100,7 +99,6 @@ var g = new Vue({
 
       g.messageShow = true
       g.currentMessageId++
-      console.log('Next ID:' + g.currentMessageId)
     },
     scrollStop: function () {
       clearInterval(g.currentInterval)
@@ -168,7 +166,6 @@ var g = new Vue({
       g.arrowStatus = 'none'
     },
     selectCharacter: function (name) {
-      console.log(name)
       g.currentCharacter = name
     },
     doNothing: function () {
@@ -178,7 +175,6 @@ var g = new Vue({
     changeFormation: function () {
       g.jjNewPosition = !g.jjNewPosition
       g.leonNewPosition = !g.leonNewPosition
-      console.log('New Foramtion!');
     }
   }
 })
@@ -219,8 +215,6 @@ initProcess = function() {
   g.sceneHeight = window.getComputedStyle(document.getElementById('scene-1')).height.replace(/[^-\d\.]/g, '')
 
   g.sceneMoveOffset = parseInt(window.getComputedStyle(document.getElementById('players')).top.replace(/[^-\d\.]/g, ''))
-  console.log('Scene Height: '+ g.sceneHeight)
-  console.log('Scene Move Offset: '+g.sceneMoveOffset)
 }
 
 checkProgress = function(y) {
